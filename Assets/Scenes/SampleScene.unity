@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 273970545}
   - component: {fileID: 273970544}
   - component: {fileID: 273970543}
+  - component: {fileID: 273970546}
   m_Layer: 5
   m_Name: Discard
   m_TagString: Untagged
@@ -160,7 +161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 514.39075, y: -245.14372}
+  m_AnchoredPosition: {x: 582, y: -245.14372}
   m_SizeDelta: {x: 62, y: 62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &273970543
@@ -206,7 +207,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 273970544}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 273970546}
+        m_TargetAssemblyTypeName: Deck, Assembly-CSharp
+        m_MethodName: presentDeck
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &273970544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +258,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273970541}
   m_CullTransparentMesh: 1
+--- !u!114 &273970546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273970541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208f0d995d411994b80c34fcb266d5e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &387870224
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,7 +459,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -77.59177, y: 234}
+  m_AnchoredPosition: {x: -77.59177, y: 290}
   m_SizeDelta: {x: -155.1796, y: 210}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &969028263
@@ -645,7 +670,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: card
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1373483027, guid: b9e632512f1708146b8ac99a223eba41, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b9e632512f1708146b8ac99a223eba41, type: 3}
 --- !u!1 &1442427617
 GameObject:
@@ -704,6 +730,7 @@ GameObject:
   - component: {fileID: 1498152050}
   - component: {fileID: 1498152049}
   - component: {fileID: 1498152048}
+  - component: {fileID: 1498152051}
   m_Layer: 5
   m_Name: Hand
   m_TagString: Untagged
@@ -729,7 +756,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -77.59131, y: 0}
+  m_AnchoredPosition: {x: -77.59131, y: 41}
   m_SizeDelta: {x: -155.1827, y: 210}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1498152048
@@ -750,7 +777,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 4
+  m_Spacing: -220
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -796,6 +823,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498152046}
   m_CullTransparentMesh: 1
+--- !u!210 &1498152051
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498152046}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &1810685005
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +846,7 @@ GameObject:
   - component: {fileID: 1810685009}
   - component: {fileID: 1810685008}
   - component: {fileID: 1810685007}
+  - component: {fileID: 1810685010}
   m_Layer: 5
   m_Name: Deck
   m_TagString: Untagged
@@ -833,7 +872,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 427.9718, y: -245.14372}
+  m_AnchoredPosition: {x: 495.58105, y: -245.14372}
   m_SizeDelta: {x: 62, y: 62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1810685007
@@ -879,7 +918,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1810685008}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1810685010}
+        m_TargetAssemblyTypeName: Deck, Assembly-CSharp
+        m_MethodName: presentDeck
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1810685008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,6 +969,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810685005}
   m_CullTransparentMesh: 1
+--- !u!114 &1810685010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810685005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208f0d995d411994b80c34fcb266d5e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2074096086
 GameObject:
   m_ObjectHideFlags: 0

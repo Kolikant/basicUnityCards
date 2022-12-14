@@ -1,24 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardEffect : MonoBehaviour
+public class CardEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
 {
-    // public enum SpecialEffect {
-    //     PRINT
-    // }
-    // public enum Element {
-    //     WATER, FIRE, EARTH, WOOD, METAL
-    // }
-    public Card.SpecialEffect specialEffect = Card.SpecialEffect.PRINT;
-    public Card.Element element = Card.Element.WATER;
-    public int cardCost = 0;
-    public int cardAttack = 0;
+    Vector3 cachedScale;
+
+    public Card cardInstance = new Card(Card.Element.WATER, Card.SpecialEffect.PRINT, 0, 0);
 
     private void Start() {
+        cachedScale = transform.localScale;
+
         Color color = Color.white;
-        switch(this.element){
+        switch(this.cardInstance.element){
             case Card.Element.WATER:
                 color = new Color32(156, 211, 219, 255);
                 break;
@@ -37,24 +33,36 @@ public class CardEffect : MonoBehaviour
         }
         this.GetComponent<Image>().color = color; 
 
-        this.transform.Find("Panel").transform.Find("Cost").transform.GetComponent<Text>().text = this.cardCost.ToString();
+        this.transform.Find("Panel").transform.Find("Cost").transform.GetComponent<Text>().text = this.cardInstance.cardCost.ToString();
     }
+ 
+     public void OnPointerEnter(PointerEventData eventData) {
+        this.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        this.gameObject.GetComponent<LayoutElement>().ignoreLayout = true;
+        this.gameObject.GetComponent<Canvas>().sortingOrder++;
+     }
+ 
+     public void OnPointerExit(PointerEventData eventData) {
+        this.transform.localScale = cachedScale;
+        this.gameObject.GetComponent<LayoutElement>().ignoreLayout = false;
+        this.gameObject.GetComponent<Canvas>().sortingOrder--;
+     }
 
     private void applySpecialEffect() {
-        switch(this.specialEffect){
+        switch(this.cardInstance.specialEffect){
             case Card.SpecialEffect.PRINT:
                 Debug.Log(this.transform.name);
                 break;
         }
     }
 
-    private void moveCardToGraveyard() {
-        Destroy(gameObject);
-    }    
+    // private void moveCardToGraveyard() {
+    //     Destroy(gameObject);
+    // }    
 
     public void playCard() {
-        Debug.Log("Damage: " + this.cardAttack);
+        Debug.Log("Damage: " + this.cardInstance.cardAttack);
         this.applySpecialEffect();
-        this.moveCardToGraveyard();
+        // this.moveCardToGraveyard();
     }
 }

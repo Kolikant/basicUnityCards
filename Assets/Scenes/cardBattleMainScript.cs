@@ -8,9 +8,9 @@ public class cardBattleMainScript : MonoBehaviour
 {
     public GameObject cardPrefab;
     int deckSize = 5;
-    List<Card> deck = new List<Card>();
-    List<Card> hand = new List<Card>();
-    List<Card> discard = new List<Card>();
+    public static List<Card> deck = new List<Card>();
+    public static List<Card> hand = new List<Card>();
+    public static List<Card> discard = new List<Card>();
 
     // Start is called before the first frame update
     void Start() {
@@ -28,8 +28,8 @@ public class cardBattleMainScript : MonoBehaviour
 
     //DisplayUpdates
     void updateCardAmountDisplay() {
-        GameObject.Find("Deck").transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>().text = this.deck.Count.ToString();
-        GameObject.Find("Discard").transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>().text = this.discard.Count.ToString();
+        GameObject.Find("Deck").transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>().text = deck.Count.ToString();
+        GameObject.Find("Discard").transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>().text = discard.Count.ToString();
     }
 
     //Logic
@@ -50,23 +50,31 @@ public class cardBattleMainScript : MonoBehaviour
             int attack = (int)(values).GetValue(random.Next(values.Length));    
 
             Debug.Log("" + element + " " + specialEffect + " " + cost + " " + attack);
-            this.deck.Add(new Card(element, specialEffect, cost, attack));
+            deck.Add(new Card(element, specialEffect, cost, attack));
         }
     }
 
     void drawCardFromDeck() {
-        if(this.deck.Count > 0) {
+        if(deck.Count > 0) {
             GameObject newCardPrefabInstance = Instantiate(cardPrefab);
             
-            Card drawnCardObject = deck[0];
-            this.hand.Add(drawnCardObject);
-            this.deck.RemoveAt(0);
+            Card cardInstance = deck[0];
+            hand.Add(cardInstance);
+            deck.RemoveAt(0);
 
-            newCardPrefabInstance.GetComponent<CardEffect>().element = drawnCardObject.element;   
-            newCardPrefabInstance.GetComponent<CardEffect>().specialEffect = drawnCardObject.specialEffect;   
-            newCardPrefabInstance.GetComponent<CardEffect>().cardCost = drawnCardObject.cardCost;
+            newCardPrefabInstance.GetComponent<CardEffect>().cardInstance = cardInstance;
 
             newCardPrefabInstance.transform.SetParent(GameObject.Find("Hand").transform);
         }
+    }
+
+    static void moveCardToGraveyard(CardEffect cardEffect) {
+        discard.Add(cardEffect.cardInstance);
+        Destroy(cardEffect.gameObject);
+    }    
+
+    public static void playCard(CardEffect cardEffect) {
+        cardEffect.playCard();
+        moveCardToGraveyard(cardEffect);
     }
 }

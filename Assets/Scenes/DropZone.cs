@@ -16,7 +16,8 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
         if(d != null) {
             d.parentToReturnTo = this.transform;
-            d.GetComponent<CardEffect>().playCard();
+            // d.GetComponent<CardEffect>().playCard();
+            cardBattleMainScript.playCard(d.GetComponent<CardEffect>());
         }
     }
 }
